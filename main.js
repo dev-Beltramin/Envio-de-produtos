@@ -9,14 +9,19 @@ $(document).ready(() => {
 
         const endpoint = `https://viacep.com.br/ws/${cep}/json`
 
-        $.ajax(endpoint).done((res) => {
+       
+        fetch(endpoint)
+            .then(res => {
+                return res.json()
+            })
+            .then((json) => {
+                const endereco = json.logradouro
+                const bairro = json.bairro
 
-            const endereco = res.logradouro
-            const bairro = res.bairro
-
-            $('#endereco').val(`${endereco} - Jd ${bairro}`)
+                $('#endereco').val(`${endereco} - Jd ${bairro}`)
 
 
-        })
+            })
+
     })
 })
